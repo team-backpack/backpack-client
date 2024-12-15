@@ -19,7 +19,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    gap: 1rem
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .small {
@@ -61,7 +62,7 @@ body {
 }
 
 .inputs .title {
-    width: 500px;
+    width: 600px;
 }
 
 h1 {
@@ -100,12 +101,20 @@ form {
     transition: 0.5s;
 }
 
-.form-control input:focus {
-    outline: 1px solid #1e1e1e;
+.form-control input[type="date"] {
+    padding-right: 1rem;
 }
 
-.input-icons input {
-    padding: 0 3rem;
+.icon-right {
+    padding-right: 3.2rem;
+}
+
+.icon-left {
+    padding-left: 3.2rem;
+}
+
+.form-control input:focus {
+    outline: 1px solid #1e1e1e;
 }
 
 .input-icons {
@@ -176,4 +185,17 @@ form {
 .form-links a:hover {
     transform: scale(1.05);
     text-decoration: underline;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 1rem;
+    align-self: flex-start;
+    font-size: 3.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-arrow:hover {
+    transform: scale(1.1);
 }

@@ -9,7 +9,7 @@ function Login() {
   return (
     <div className="container large">
       <div className="logo">
-        <img src="src/assets/logo.png" alt="Logo backpack" />
+        <img src="src/assets/logo_shadow.png" alt="Logo backpack" />
       </div>
 
       <div className="divider"></div>
@@ -24,7 +24,7 @@ function Login() {
             <label>E-mail ou nome de usuário</label>
             <div className="input-icons">
               <LuUser className="icon left" />
-              <input type="text" placeholder="exemplo@email.com" />
+              <input type="text" placeholder="exemplo@email.com" className="icon-left" />
             </div>
           </div>
 
@@ -35,6 +35,7 @@ function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder={showPassword ? "123456789" : "*********"}
+                className="icon-left icon-right"
               />
               {showPassword ? (
                 <LuEyeClosed
