@@ -1,0 +1,135 @@
+.container {
+    gap: 0;
+}
+
+.post {
+    width: 100%;
+    border-top: 1px solid #E4E4E7;
+    border-bottom: 1px solid #E4E4E7;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.post header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.profile {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.profile .names {
+    line-height: 130%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile .names .displayName {
+    font-size: 1.2rem;
+}
+
+.profile .names .username {
+    font-size: 0.9rem;
+    color: rgb(30, 30, 30, 70%);
+}
+
+.profile .picture {
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+    height: 65px;
+    width: 65px;
+    border-radius: 5rem;
+}
+
+.post main {
+    width: 100%;
+    height: 100%;
+}
+
+.post main .images {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    overflow-x: scroll;
+    scroll-behavior: auto;
+    gap: 0.7rem;
+    max-width: 100%;
+    max-height: 600px;
+    user-select: none;
+}
+
+.post main .images::-webkit-scrollbar {
+    display: none; 
+}
+
+.post main .images:hover {
+    cursor: grab;
+}
+
+.post main .images:active {
+    cursor: grabbing;
+}
+
+.post main .images img {
+    object-fit: cover;
+    object-position: center center;
+    max-width: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+.post .text {
+    padding: 0.7rem;
+    font-size: 0.95rem;
+}
+
+.post footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.post footer .interactions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.5rem;
+    height: 40px;
+    flex: 90%;
+}
+
+.post footer .interaction,
+.post footer .options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 0.2rem
+}
+
+.post footer .interaction span {
+    font-size: 0.9rem;
+}
+
+.post footer .options {
+    flex: 10%
+}
+
+.icon {
+    font-size: 1.6rem;
+}
