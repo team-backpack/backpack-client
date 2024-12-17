@@ -3,7 +3,7 @@ import { FiAtSign, FiLock, FiShield } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { LuCake, LuEye, LuEyeClosed } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../../context/AuthContext";
 
 function RegisterForm({ setCurrentStep }) {
   const [inputs, setInputs] = useState({

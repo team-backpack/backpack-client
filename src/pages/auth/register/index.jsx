@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import RegisterForm from "../../../components/register/form";
-import TokenConfirmation from "../../../components/register/token";
+import RegisterForm from "./form";
+import TokenConfirmation from "./token";
 
 function Register() {
   const [currentStep, setCurrentStep] = useState(0);
