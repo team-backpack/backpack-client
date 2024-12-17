@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import ProfileBadge from "../../profile/badge";
+import ProfileBadge from "../profile/badge";
 import { LuNotebookText } from "react-icons/lu";
 import {
   FaRegBell,
@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { MdExitToApp, MdOutlinePeopleAlt } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 function NavigationBar() {
   const navigate = useNavigate()

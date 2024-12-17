@@ -1,6 +1,4 @@
-import Explore from "../../components/feed/explore";
-import NavigationBar from "../../components/feed/navbar";
-import Post from "../../components/feed/post";
+import Post from "../../components/post";
 import "./styles.css";
 
 function Feed() {
@@ -25,18 +23,8 @@ function Feed() {
   };
 
   return (
-    <div className="container large">
-      <NavigationBar />
-
-      <div className="divider"></div>
-
-      <div className="posts">
-        <Post post={post} />
-      </div>
-
-      <div className="divider"></div>
-
-      <Explore />
+    <div className="posts">
+      <Post post={post} />
     </div>
   );
 }

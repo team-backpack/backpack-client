@@ -1,7 +1,7 @@
 import { FiSearch } from "react-icons/fi";
 import { MdOutlinePeopleAlt } from "react-icons/md";
-import CommunityBadge from "../../community/badge";
-import ProfileBadge from "../../profile/badge";
+import CommunityBadge from "../community/badge";
+import ProfileBadge from "../profile/badge";
 import { LuUser } from "react-icons/lu";
 import "./styles.css";
 
