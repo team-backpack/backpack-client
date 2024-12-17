@@ -13,9 +13,6 @@ function CommunityBadge() {
         <header className="names">
           <span className="displayName">Comunidade legal</span>
           <span className="username">@comunidade.legal</span>
-          <div className="follow">
-            <button>Participar</button>
-          </div>
         </header>
         <main className="description">
           <span>

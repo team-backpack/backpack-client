@@ -10,10 +10,33 @@ const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
+  const logout = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/auth/logout/", {
+        method: "POST",
+      });
+
+      const res = await response.json();
+      if (res.error) {
+        throw new Error(res.error);
+      }
+
+      setUser(null);
+      localStorage.setItem("user", null);
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    } finally {
+      setLoading(false);
+      toast.success("Usuário deslogado com sucesso");
+    }
+  };
+
   const login = async (data) => {
     if (!data) return;
 
-    const ok = validateLoginData(data)
+    const ok = validateLoginData(data);
     if (!ok) return;
 
     let request = { password: data.password };
@@ -107,7 +130,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loading, user, register, verify, login }}>
+    <AuthContext.Provider
+      value={{ loading, user, register, verify, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

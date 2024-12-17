@@ -8,9 +8,20 @@ import {
   FaRegCompass,
   FaPlus,
 } from "react-icons/fa";
-import { MdOutlinePeopleAlt } from "react-icons/md";
+import { MdExitToApp, MdOutlinePeopleAlt } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 function NavigationBar() {
+  const navigate = useNavigate()
+  const { logout } = useAuth();
+
+  const handleLogOut = async () => {
+    await logout();
+
+    navigate("/")
+  }
+
   return (
     <div className="navigation-bar">
       <div className="left-side">
@@ -61,6 +72,7 @@ function NavigationBar() {
           </div>
         </main>
         <footer>
+          <MdExitToApp className="icon" onClick={handleLogOut} />
           <ProfileBadge />
         </footer>
       </div>
