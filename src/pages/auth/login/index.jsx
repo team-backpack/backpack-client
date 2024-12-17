@@ -2,9 +2,34 @@ import { useState } from "react";
 import { FiLock } from "react-icons/fi";
 import { LuEye, LuEyeClosed, LuUser } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const [inputs, setInputs] = useState({
+    login: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await login();
+    navigate("/");
+  };
 
   return (
     <div className="container large">
@@ -19,12 +44,19 @@ function Login() {
           <h1>Olá novamente, aventureiro!</h1>
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-control">
             <label>E-mail ou nome de usuário</label>
             <div className="input-icons">
               <LuUser className="icon left" />
-              <input type="text" placeholder="exemplo@email.com" className="icon-left" />
+              <input
+                type="text"
+                placeholder="exemplo@email.com"
+                name="login"
+                className="icon-left"
+                value={inputs.login}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
 
@@ -35,7 +67,10 @@ function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder={showPassword ? "123456789" : "*********"}
+                name="password"
                 className="icon-left icon-right"
+                value={inputs.password}
+                onChange={handleInputChange}
               />
               {showPassword ? (
                 <LuEyeClosed

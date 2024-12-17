@@ -19,7 +19,6 @@ function TokenConfirmation({ setCurrentStep }) {
   };
 
   const navigate = useNavigate();
-
   const { verify } = useAuth();
 
   const handleSubmit = async (e) => {

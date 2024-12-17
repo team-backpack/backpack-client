@@ -66,4 +66,40 @@ const validateRegisterData = ({
   return true;
 };
 
-export { validateRegisterData }
+const validateLoginData = ({
+  login,
+  password
+}) => {
+  if (!login || !password) {
+    toast.error("Por favor, preencha todos os campos");
+    return false;
+  }
+
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isUsernameValid = (username) => {
+    const usernameRegex = /^[a-zA-Z0-9_.]{3,20}$/;
+    return usernameRegex.test(username);
+  };
+
+  if (login.includes("@")) {
+    if (!isEmailValid(login)) {
+      toast.error("E-mail inválido");
+      return false;
+    }
+  } else {
+    if (!isUsernameValid(login)) {
+      toast.error(
+        "Nome de usuário inválido. Use apenas letras, números ou _. Deve ter entre 3 e 20 caracteres."
+      );
+      return false;
+    }
+  }
+
+  return true;
+};
+
+export { validateRegisterData, validateLoginData }

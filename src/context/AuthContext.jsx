@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { validateRegisterData } from "../util/validation";
+import { validateLoginData, validateRegisterData } from "../util/validation";
 
 const AuthContext = createContext();
 
@@ -9,6 +9,44 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
+
+  const login = async (data) => {
+    if (!data) return;
+
+    const ok = validateLoginData(data)
+    if (!ok) return;
+
+    let request = { password: data.password };
+
+    if (data.login.includes("@")) {
+      request.email = data.login;
+    } else {
+      request.username = data.login;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch("/api/auth/login/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(request),
+      });
+
+      const res = await response.json();
+      if (res.error) {
+        throw new Error(res.error);
+      }
+
+      setUser(res);
+      localStorage.setItem("user", JSON.stringify(res));
+    } catch (error) {
+      toast.error(error.message);
+      return;
+    } finally {
+      setLoading(false);
+      toast.success("Usuário logado com sucesso");
+    }
+  };
 
   const register = async (data) => {
     if (!data) return;
@@ -36,7 +74,7 @@ const AuthProvider = ({ children }) => {
       return false;
     } finally {
       setLoading(false);
-      toast.success("Cadastrado com sucesso")
+      toast.success("Cadastrado com sucesso");
     }
 
     return true;
@@ -64,12 +102,12 @@ const AuthProvider = ({ children }) => {
       return;
     } finally {
       setLoading(false);
-      toast.success("Usuário verificado com sucesso")
+      toast.success("Usuário verificado com sucesso");
     }
   };
 
   return (
-    <AuthContext.Provider value={{ loading, user, register, verify }}>
+    <AuthContext.Provider value={{ loading, user, register, verify, login }}>
       {children}
     </AuthContext.Provider>
   );
