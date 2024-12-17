@@ -1,4 +1,7 @@
 import "./styles.css";
+import Subject from "../../../components/characterization/subject";
+import Back from "../../../components/characterization/back";
+import Country from "../../../components/characterization/country";
 
 function Cultural() {
 
@@ -57,6 +60,21 @@ function Cultural() {
                 {/*TODO: implements all linguages in that list*/}
                 <option value=""/>
               </datalist>
+            </div>
+          </div>
+
+          <div className="form-control">
+            <label>Quais são seus interesses culturais?</label>
+            <div className="countrys">
+              <Country country={country} />
+            </div>
+            <input placeholder="+ adicionar"/>
+          </div>
+
+          <div className="form-control">
+            <label>Do que você gosta? Escolha pelo menos 3</label>
+            <div className="subjects">
+              <Subject subject={subject} />
             </div>
           </div>
 
