@@ -5,16 +5,17 @@ import NotFound from "./pages/not-found";
 import Register from "./pages/auth/register";
 import Feed from "./pages/feed";
 import { Toaster } from "react-hot-toast";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const authUser = false;
+  const { user } = useAuth();
 
   return (
     <div>
       <Routes>
         <Route
           path="/"
-          element={authUser ? <Feed /> : <Navigate to={"/login"} />}
+          element={user ? <Feed /> : <Navigate to={"/login"} />}
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

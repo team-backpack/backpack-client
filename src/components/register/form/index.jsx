@@ -28,7 +28,6 @@ function RegisterForm({ setCurrentStep }) {
     e.preventDefault();
 
     const ok = await register(inputs);
-
     if (!ok) return
 
     setCurrentStep(1);
