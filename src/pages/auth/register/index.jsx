@@ -23,7 +23,7 @@ function Register() {
     <div className="container large">
       <div className="inputs">{currentComponent}</div>
 
-      <div className="divider"></div>
+      <div className="partial-divider"></div>
 
       <div className="logo">
         <img src="icon.png" alt="Logo backpack" />

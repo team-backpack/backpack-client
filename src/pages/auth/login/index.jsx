@@ -12,7 +12,7 @@ function Login() {
         <img src="src/assets/logo_shadow.png" alt="Logo backpack" />
       </div>
 
-      <div className="divider"></div>
+      <div className="partial-divider"></div>
 
       <div className="inputs">
         <div className="title">

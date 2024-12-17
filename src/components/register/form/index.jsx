@@ -3,16 +3,39 @@ import { FiAtSign, FiLock, FiShield } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { LuCake, LuEye, LuEyeClosed } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 function RegisterForm({ setCurrentStep }) {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+    birthDate: "",
+    password: "",
+    confirmedPassword: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const { register } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setCurrentStep(1)
-  }
+    const ok = await register(inputs);
+
+    if (!ok) return
+
+    setCurrentStep(1);
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
 
   return (
     <>
@@ -24,7 +47,14 @@ function RegisterForm({ setCurrentStep }) {
           <label>Nome de usuário</label>
           <div className="input-icons">
             <FiAtSign className="icon left" />
-            <input type="text" placeholder="username" className="icon-left" />
+            <input
+              type="text"
+              placeholder="username"
+              className="icon-left"
+              name="username"
+              value={inputs.username}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
 
@@ -36,6 +66,9 @@ function RegisterForm({ setCurrentStep }) {
               type="text"
               placeholder="exemplo@email.com"
               className="icon-left"
+              name="email"
+              value={inputs.email}
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -48,6 +81,9 @@ function RegisterForm({ setCurrentStep }) {
               type="date"
               placeholder="exemplo@email.com"
               className="icon-left"
+              name="birthDate"
+              value={inputs.birthDate}
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -59,7 +95,11 @@ function RegisterForm({ setCurrentStep }) {
             <input
               type={showPassword ? "text" : "password"}
               placeholder={showPassword ? "123456789" : "*********"}
+              autoComplete="new-password"
               className="icon-left icon-right"
+              name="password"
+              value={inputs.password}
+              onChange={handleInputChange}
             />
             {showPassword ? (
               <LuEyeClosed
@@ -82,7 +122,11 @@ function RegisterForm({ setCurrentStep }) {
             <input
               type={showConfirmedPassword ? "text" : "password"}
               placeholder={showConfirmedPassword ? "123456789" : "*********"}
+              autoComplete="new-password"
               className="icon-left icon-right"
+              name="confirmedPassword"
+              value={inputs.confirmedPassword}
+              onChange={handleInputChange}
             />
             {showConfirmedPassword ? (
               <LuEyeClosed
