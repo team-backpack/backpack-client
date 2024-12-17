@@ -1,0 +1,70 @@
+.community {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+    border-bottom: 1px solid #E4E4E7;
+    padding: 0.6rem;
+}
+
+.community header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.community .banner img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.community .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.2rem 0;
+}
+
+.community .info .names {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 70%;
+}
+
+.community .info .names .displayName {
+    font-size: 1rem;
+}
+
+.community .info .names .username {
+    font-size: 0.9rem;
+    color: rgb(30, 30, 30, 70%);
+}
+
+.community .info .follow {
+    position: absolute;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+.community .info .follow button {
+    color: #09090B;
+    background-color: #5DADE2;
+    border-radius: 10px;
+    padding: 0.4rem;
+    border: none;
+    height: 2rem;
+    width: 100%;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.community .info .description {
+    text-wrap: wrap;
+    font-size: 0.95rem;
+}

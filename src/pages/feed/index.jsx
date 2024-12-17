@@ -1,3 +1,4 @@
+import Explore from "../../components/feed/explore";
 import Post from "../../components/feed/post";
 import "./styles.css";
 
@@ -34,7 +35,7 @@ function Feed() {
 
       <div className="divider"></div>
 
-      <div className="others"></div>
+      <Explore />
     </div>
   );
 }

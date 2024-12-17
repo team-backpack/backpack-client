@@ -1,0 +1,54 @@
+.explore {
+    flex: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.search {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.explore .communities
+.explore .profiles {
+    width: 100%;
+    border-top: 1px solid #E4E4E7;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.communities .title,
+.profiles .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.4rem;
+    border-top: 1px solid #E4E4E7;
+    border-bottom: 1px solid #E4E4E7;
+}
+
+.communities header .icon,
+.profiles header .icon {
+    font-size: 1.8rem;
+}
+
+.communities header h2,
+.profiles header h2 {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.communities main,
+.profiles main {
+    display: flex;
+    flex-direction: column;
+}

@@ -19,7 +19,7 @@
     padding: 0 1rem;
 }
 
-.profile {
+.post .profile {
     height: 80px;
     display: flex;
     flex-direction: row;
@@ -28,22 +28,22 @@
     gap: 0.6rem;
 }
 
-.profile .names {
+.post .profile .names {
     line-height: 130%;
     display: flex;
     flex-direction: column;
 }
 
-.profile .names .displayName {
+.post .profile .names .displayName {
     font-size: 1.2rem;
 }
 
-.profile .names .username {
+.post .profile .names .username {
     font-size: 0.9rem;
     color: rgb(30, 30, 30, 70%);
 }
 
-.profile .picture {
+.post .profile .picture {
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat;
@@ -65,8 +65,8 @@
     scroll-behavior: auto;
     gap: 0.7rem;
     max-width: 100%;
-    max-height: 600px;
     user-select: none;
+    max-height: 500px;
 }
 
 .post main .images::-webkit-scrollbar {

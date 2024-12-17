@@ -1,0 +1,74 @@
+.profiles {
+    width: 100%;
+}
+
+.profiles .profile {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+    border-bottom: 1px solid #E4E4E7;
+    padding: 0.6rem;
+}
+
+.profile header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile .picture {
+    width: 3.2rem;
+    height: 3.2rem;
+}
+
+.profile .picture img {
+    width: 3.2rem;
+    height: 3.2rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5rem;
+}
+
+.profile .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.profile .info .names {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 70%;
+}
+
+.profile .info .names .displayName {
+    font-size: 1rem;
+}
+
+.profile .info .names .username {
+    font-size: 0.9rem;
+    color: rgb(30, 30, 30, 70%);
+}
+
+.profile .info .follow {
+    position: absolute;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+.profile .info .follow button {
+    color: #09090B;
+    background-color: #5DADE2;
+    border-radius: 10px;
+    padding: 0.3rem 0.9rem;
+    border: none;
+    width: 100%;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
