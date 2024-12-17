@@ -1,4 +1,5 @@
 import Explore from "../../components/feed/explore";
+import NavigationBar from "../../components/feed/navbar";
 import Post from "../../components/feed/post";
 import "./styles.css";
 
@@ -25,7 +26,7 @@ function Feed() {
 
   return (
     <div className="container large">
-      <div className="sidebar"></div>
+      <NavigationBar />
 
       <div className="divider"></div>
 

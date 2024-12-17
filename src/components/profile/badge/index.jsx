@@ -1,6 +1,8 @@
 import "./styles.css";
 
 function ProfileBadge() {
+  const isAuthUser = true;
+
   return (
     <div className="profile">
       <div className="picture">
@@ -13,9 +15,11 @@ function ProfileBadge() {
         <header className="names">
           <span className="displayName">Nome legal</span>
           <span className="username">@nomelegal</span>
-          <div className="follow">
-            <button>Seguir</button>
-          </div>
+          {!isAuthUser && (
+            <div className="follow">
+              <button>Seguir</button>
+            </div>
+          )}
         </header>
       </div>
     </div>
