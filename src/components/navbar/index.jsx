@@ -11,6 +11,7 @@ import {
 import { MdExitToApp, MdOutlinePeopleAlt } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Icon from "../../assets/icon.png"
 
 function NavigationBar() {
   const navigate = useNavigate()
@@ -27,7 +28,7 @@ function NavigationBar() {
       <div className="left-side">
         <main>
           <div className="logo-title">
-            <img src="icon.png" alt="Logo backpack" className="logo" />
+            <img src={Icon} alt="Logo backpack" className="logo" />
             <h1 className="title">Backpack</h1>
           </div>
           <div className="navbar">
