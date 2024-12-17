@@ -1,5 +1,6 @@
 import "./styles.css";
 import Suggestion from "../../../components/characterization/suggestion";
+import Back from "../../../components/characterization/back";
 
 function Suggestions() {
   const profile = {};
@@ -15,7 +16,7 @@ function Suggestions() {
 
       <form>
         <div className="sugestions">
-          <Suggestion sugestion={profile} />
+          <Suggestion profile={profile} />
         </div>
 
         <div className="form-control">
