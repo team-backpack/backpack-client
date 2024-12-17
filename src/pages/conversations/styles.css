@@ -1,0 +1,77 @@
+.conversations {
+    flex: 45%;
+    height: 100%;
+    width: 45%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.conversations header {
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #E4E4E7;;
+}
+
+.conversations h2 {
+    font-weight: 500;
+    font-size: 1.7rem;
+}
+
+.conversations main {
+    width: 100%;
+}
+
+.conversation {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    max-height: 4.5rem;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: hidden;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid #E4E4E7;
+    cursor: pointer;
+}
+
+.conversation:hover {
+    background-color: #F5F5F5;
+}
+
+.conversation .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-overflow: hidden;
+    overflow: hidden;
+    gap: 0.6rem;
+}
+
+.conversation .user .textual {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.conversation .user .textual .lastMessage {
+    height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: rgba(30, 30, 30, 0.70);
+}
+
+.conversation .user img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 2rem;
+}

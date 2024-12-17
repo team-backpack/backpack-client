@@ -6,6 +6,7 @@ import Register from "./pages/auth/register";
 import Feed from "./pages/feed";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/protect";
+import Conversations from "./pages/conversations";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Feed />} />
+          <Route path="/conversations" element={<Conversations />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
