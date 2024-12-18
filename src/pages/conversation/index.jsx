@@ -8,16 +8,46 @@ import Message from "../../components/conversation/message";
 import { useMessage } from "../../hooks/useMessage";
 import { diffInHours } from "../../util/time";
 import { useConversation } from "../../hooks/useConversation";
+import { useUser } from "../../hooks/useUser";
+import { useEffect, useMemo } from "react";
 
 function Conversation() {
   const params = useParams();
+  const { loading, messages, getMessages } = useMessage(params.participantId);
 
-  const { loading, messages } = useMessage(params.participantId);
+  useEffect(() => {
+    getMessages();
+  }, []);
 
-  const { selectedConversation } = useConversation();
-  console.log(selectedConversation);
+  const { conversations } = useConversation();
 
-  const participant = selectedConversation.participant;
+  const { getUser } = useUser();
+  const participant = useMemo(async () => {
+    return await getUser(params.participantId);
+  }, [conversations, params.participantId]);
+
+  console.log(participant);
+
+  const sortedMessages = useMemo(() => {
+    return messages.slice().reverse();
+  }, [messages]);
+
+  const processedMessages = useMemo(() => {
+    const sortedMessages = messages.slice().reverse();
+
+    return sortedMessages.map((message, i) => {
+      const isFirst = sortedMessages[i + 1]
+        ? sortedMessages[i + 1].senderId !== message.senderId
+        : false;
+
+      const isLast =
+        !sortedMessages[i - 1] ||
+        sortedMessages[i - 1].senderId !== message.senderId ||
+        diffInHours(message.createdAt, sortedMessages[i - 1]?.createdAt) >= 1;
+
+      return { ...message, isFirst, isLast };
+    });
+  }, [sortedMessages]);
 
   return (
     <div className="conversation">
@@ -30,17 +60,15 @@ function Conversation() {
         <div className="profile">
           <img
             src={
-              participant.pictureURL
-                ? participant.pictureURL
+              participant.profile
+                ? participant.profile.pictureURL
                 : DefaultProfilePicture
             }
             alt="Picture"
           />
           <h2>
-            {participant.displayName
-              ? participant.displayName
-              : participant.user
-              ? participant.user.username
+            {participant.profile
+              ? participant.profile.displayName
               : participant.username}
           </h2>
         </div>
@@ -52,31 +80,14 @@ function Conversation() {
       ) : (
         <main>
           <div className="messages">
-            {messages
-              .slice()
-              .reverse()
-              .map((message, i) => (
-                <Message
-                  key={i}
-                  message={message}
-                  isFirst={
-                    messages[messages.length - i]
-                      ? messages[messages.length - i].senderId !==
-                        message.senderId
-                      : true
-                  }
-                  isLast={
-                    messages[messages.length - i - 2]
-                      ? messages[messages.length - i - 2].senderId !==
-                          message.senderId ||
-                        diffInHours(
-                          message.createdAt,
-                          messages[messages.length - i - 2].createdAt
-                        ) >= 1
-                      : true
-                  }
-                />
-              ))}
+            {processedMessages.map((message, i) => (
+              <Message
+                key={i}
+                message={message}
+                isFirst={message.isFirst}
+                isLast={message.isLast}
+              />
+            ))}
           </div>
           <MessageInput />
         </main>

@@ -9,19 +9,19 @@ import {
   FaPlus,
 } from "react-icons/fa";
 import { MdExitToApp, MdOutlinePeopleAlt } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Icon from "../../assets/icon.png"
+import Icon from "../../assets/icon.png";
 
 function NavigationBar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogOut = async () => {
     await logout();
 
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   return (
     <div className="navigation-bar">
@@ -53,12 +53,14 @@ function NavigationBar() {
               </div>
             </div>
 
-            <div className="navbar-item-container">
-              <div className="navbar-item">
-                <FaRegPaperPlane className="icon" />
-                <h1>Mensagens</h1>
+            <Link to={"/messages"}>
+              <div className="navbar-item-container">
+                <div className="navbar-item">
+                  <FaRegPaperPlane className="icon" />
+                  <h1>Mensagens</h1>
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="navbar-item-container">
               <div className="navbar-item">
