@@ -12,21 +12,29 @@ import { MdExitToApp, MdOutlinePeopleAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Icon from "../../assets/icon.png";
+import { useState } from "react";
+import PostModal from "./post-modal";
 
 function NavigationBar() {
   const navigate = useNavigate();
   const { logout } = useAuth();
 
-  const { user } = useAuth();
-
   const handleLogOut = async () => {
     await logout();
-
     navigate("/");
+  };
+
+  const { user } = useAuth();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
   };
 
   return (
     <div className="navigation-bar">
+      <PostModal isOpen={isModalOpen} toggleModal={toggleModal} />
       <div className="left-side">
         <main>
           <div className="logo-title">
@@ -74,7 +82,7 @@ function NavigationBar() {
               </div>
             </div>
 
-            <button className="blue button">
+            <button className="blue button" onClick={toggleModal}>
               <FaPlus className="blue" />
             </button>
           </div>
