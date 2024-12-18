@@ -20,6 +20,7 @@ function App() {
             <Route path="/messages/:participantId" element={<Conversation />} />
           </Route>
         </Route>
+        <Route path="/community" element={<Community />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
