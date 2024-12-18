@@ -1,0 +1,91 @@
+
+  /* Estilos do componente infobar */
+  .infobar {
+    display: flex;
+    align-items: flex-start; 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%; 
+    max-width: 600px; 
+    height: 100%;
+    min-height: 500px; 
+    margin: 20px auto;
+    overflow: hidden;
+    }
+  
+  
+  /* Contêiner de detalhes */
+  .infobar-details {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    gap: 20px; 
+    align-items: center; 
+  }
+  
+
+  .flag-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    width: auto;
+    border-radius: 15px;
+    gap:5px;
+    background-color: #58d68d;
+    left: 10px;
+  }
+  
+  .flag-img {
+    width: 20px; 
+    height: auto;
+  }
+  
+  .community-nationality {
+    font-size: 12px;
+    margin-top: 10px;
+    color: rgb(0, 0, 0);  
+    margin: 0; 
+    line-height: 1.2; 
+    }
+  
+  /* Informações de texto */
+  .text-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .community-name {
+    font-size: 20px; /* Título maior */
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .community-creation {
+    margin-top: 5px;
+    color: #888;
+    font-size: 15px;
+  }
+  
+  hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #eee;
+    width: 80%; /* Reduz a largura da linha */
+  }
+  
+  .community-description {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.8; /* Espaçamento maior entre linhas */
+    padding: 0 10px; /* Adiciona espaçamento interno */
+  }
+  
+  .community-members {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+  }
+  
