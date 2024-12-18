@@ -26,27 +26,32 @@
     padding: 1.4rem 1.4rem 0 1.4rem;
 }
 
-.modal form {
+.modal form,
+.comment form {
     width: 100%;
     height: 100%;
 }
 
-.modal .close {
+.modal .close,
+.comment .close {
     justify-self: flex-end;
     top: 1rem;
 }
 
-.modal .close .icon {
+.modal .close .icon,
+.comment .close .icon {
     font-size: 2rem;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.modal .close .icon:hover {
+.modal .close .icon:hover,
+.comment .close .icon:hover {
     transform: scale(1.1);
 }
 
-.modal main {
+.modal main,
+.comment main {
     width: 100%;
     height: 90%;
     display: flex;
@@ -54,17 +59,20 @@
     gap: 0.6rem;
 }
 
-.modal .picture {
+.modal .picture,
+.comment .picture {
     height: 100%;
 }
 
-.modal .picture img {
+.modal .picture img,
+.comment .picture img {
     border-radius: 50px;
     width: 3.4rem;
     height: 3.4rem;
 }
 
-.modal main .info {
+.modal main .info,
+.comment main .info {
     width: 100%;
     height: 100%;
     display: flex;
@@ -72,7 +80,8 @@
     gap: 0.5rem;
 }
 
-.modal main .info form {
+.modal main .info form,
+.comment main .info form {
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -81,7 +90,8 @@
     width: 100%;
 }
 
-.modal main .info textarea {
+.modal main .info textarea,
+.comment main .info textarea {
     border: none;
     outline: none;
     resize: none;
@@ -92,19 +102,13 @@
     padding: 0.5rem;
 }
 
-.modal main .info textarea:focus {
+.modal main .info textarea:focus,
+.comment main .info textarea:focus {
     outline: none;
 }
 
-.footer-container {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    height: 3rem;
-    gap: 1rem;
-}
-
-.modal footer {
+.modal footer,
+.comment footer {
     width: 100%;
     height: 20%;
     display: flex;
@@ -114,19 +118,22 @@
     padding: 0.8rem 0;
 }
 
-.modal footer .actions {
+.modal footer .actions,
+.comment footer .actions {
     display: flex;
     flex-direction: row;
     gap: 0.2rem;
 }
 
-.modal .divider {
+.modal .divider,
+.comment .divider {
     width: 100%;
     background-color: #E4E4E7;
     height: 1px;
 }
 
-.modal .image-input {
+.modal .image-input,
+.comment .image-input {
     width: 3rem;
     height: 100%;
     display: flex;
@@ -135,11 +142,13 @@
     cursor: pointer;
 }
 
-.modal .image-input .icon {
+.modal .image-input .icon,
+.comment .image-input .icon {
     font-size: 2.3rem;
 }
 
-.modal .image-input input {
+.modal .image-input input,
+.comment .image-input input {
     display: none;
     width: 100%;
     height: 100%;
@@ -195,4 +204,16 @@
     height: 6rem;
     border-radius: 1rem;
     object-fit: cover;
+}
+
+.comment {
+    width: 100%;
+    background-color: #FAFAFA;
+    min-height: 23rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    padding: 0.8rem;
 }

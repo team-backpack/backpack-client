@@ -8,10 +8,10 @@ import { TiDelete } from "react-icons/ti";
 import { uploadImage } from "../../../cloudinary/upload";
 import { usePost } from "../../../hooks/usePost";
 import { BeatLoader } from "react-spinners";
-import { useAuth } from "../../../context/AuthContext"
-import DefaultProfilePicture from "../../../assets/default-user.png"
+import { useAuth } from "../../../context/AuthContext";
+import DefaultProfilePicture from "../../../assets/default-user.png";
 
-function PostModal({ isOpen, toggleModal }) {
+function PostModal({ isOpen, toggleModal, isComment, parentId, setComment }) {
   const [inputs, setInputs] = useState({
     text: "",
     media: [],
@@ -19,7 +19,7 @@ function PostModal({ isOpen, toggleModal }) {
 
   const [previewURLs, setPreviewURLs] = useState([]);
 
-  const { loading, publishPost } = usePost();
+  const { loading, publishPost, comment } = usePost();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,11 +31,15 @@ function PostModal({ isOpen, toggleModal }) {
       text: inputs.text,
       mediaURLs,
     };
-    console.log(post);
 
-    await publishPost(post);
+    if (isComment) {
+      await comment(parentId, post)
+      setComment()
+    } else {
+      await publishPost(post);
+    } 
 
-    toggleModal()
+    toggleModal();
   };
 
   const handleFileChange = (e) => {
@@ -66,82 +70,81 @@ function PostModal({ isOpen, toggleModal }) {
     fileInputRef.current.click();
   };
 
-  const { user } = useAuth()
+  const { user } = useAuth();
+
+  const ModalContent = (
+    <>
+      {loading ? (
+        <div className="spinner">
+          <BeatLoader loading={loading} />
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <main>
+            <div className="picture">
+              <img
+                src={user.profile.pictureURL || DefaultProfilePicture}
+                alt="Icone do Perfil"
+              />
+            </div>
+            <div className="info">
+              <textarea
+                placeholder="Estou pensando sobre..."
+                name="text"
+                value={inputs.text}
+                onChange={(e) => setInputs({ ...inputs, text: e.target.value })}
+              />
+              <div className="preview-images">
+                {previewURLs.map((previewURL, i) => (
+                  <div key={i} className="preview-image">
+                    <img key={i} src={previewURL} alt={`Preview ${i}`} />
+                    <TiDelete className="icon" onClick={() => removeFile(i)} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="close">
+              <IoCloseOutline className="icon" onClick={toggleModal} />
+            </div>
+          </main>
+
+          <div className="divider"></div>
+
+          <footer>
+            <div className="actions">
+              <div className="image-input">
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  multiple
+                  className="input-file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                />
+                <LuImagePlus className="icon" onClick={handleImageClick} />
+              </div>
+              <div className="image-input">
+                <MdGifBox className="icon" />
+              </div>
+            </div>
+
+            <button className="blue button-submit">Publicar</button>
+          </footer>
+        </form>
+      )}
+    </>
+  );
 
   return (
     <>
-      {isOpen && (
-        <div className="modal-background">
-          <div className="modal">
-            {loading ? (
-              <div className="spinner">
-                <BeatLoader loading={loading} />
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <main>
-                  <div className="picture">
-                    <img
-                      src={user.profile.pictureURL || DefaultProfilePicture}
-                      alt="Icone do Perfil"
-                    />
-                  </div>
-                  <div className="info">
-                    <textarea
-                      placeholder="Estou pensando sobre..."
-                      name="text"
-                      value={inputs.text}
-                      onChange={(e) =>
-                        setInputs({ ...inputs, text: e.target.value })
-                      }
-                    />
-                    <div className="preview-images">
-                      {previewURLs.map((previewURL, i) => (
-                        <div key={i} className="preview-image">
-                          <img key={i} src={previewURL} alt={`Preview ${i}`} />
-                          <TiDelete
-                            className="icon"
-                            onClick={() => removeFile(i)}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="close">
-                    <IoCloseOutline className="icon" onClick={toggleModal} />
-                  </div>
-                </main>
-
-                <div className="divider"></div>
-
-                <footer>
-                  <div className="actions">
-                    <div className="image-input">
-                      <input
-                        type="file"
-                        accept="image/png, image/jpeg"
-                        multiple
-                        className="input-file"
-                        ref={fileInputRef}
-                        onChange={handleFileChange}
-                      />
-                      <LuImagePlus
-                        className="icon"
-                        onClick={handleImageClick}
-                      />
-                    </div>
-                    <div className="image-input">
-                      <MdGifBox className="icon" />
-                    </div>
-                  </div>
-
-                  <button className="blue button-submit">Publicar</button>
-                </footer>
-              </form>
-            )}
+      {isOpen &&
+        (!isComment ? (
+          <div className="modal-background">
+            <div className="modal">{ModalContent}</div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="comment">{ModalContent}</div>
+        ))}
     </>
   );
 }

@@ -124,11 +124,14 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    gap: 0.2rem
+    gap: 0.2rem;
+    width: 3rem;
+    cursor: pointer;
 }
 
 .post footer .interaction span {
     font-size: 0.9rem;
+    width: 1rem;
 }
 
 .post footer .options {
@@ -137,4 +140,16 @@
 
 .icon {
     font-size: 1.6rem;
+}
+
+.liked {
+    color: #F39C12;
+}
+
+.reposted {
+    color: #5DADE2;
+}
+
+.commented {
+    color: #58D68D;
 }
