@@ -1,20 +1,19 @@
 import "./styles.css";
+import DefaultProfilePicture from "../../../assets/default-user.png";
 
-function ProfileBadge() {
-  const isAuthUser = true;
-
+function ProfileBadge({ user, isAuthUser }) {
   return (
     <div className="profile">
       <div className="picture">
         <img
-          src="https://images.unsplash.com/photo-1606663889134-b1dedb5ed8b7?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={user.profile.pictureURL || DefaultProfilePicture}
           alt="Picture"
         />
       </div>
       <div className="info">
         <header className="names">
-          <span className="displayName">Nome legal</span>
-          <span className="username">@nomelegal</span>
+          <span className="displayName">{user.profile.displayName}</span>
+          <span className="username">@{user.username}</span>
           {!isAuthUser && (
             <div className="follow">
               <button>Seguir</button>

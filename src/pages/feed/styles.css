@@ -3,7 +3,7 @@
 }
 
 .posts {
-    flex: 50%;
+    flex: 45%;
     height: 100%;
     display: flex;
     align-items: flex-start;

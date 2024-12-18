@@ -17,6 +17,8 @@ function NavigationBar() {
   const navigate = useNavigate();
   const { logout } = useAuth();
 
+  const { user } = useAuth();
+
   const handleLogOut = async () => {
     await logout();
 
@@ -31,13 +33,16 @@ function NavigationBar() {
             <img src={Icon} alt="Logo backpack" className="logo" />
             <h1 className="title">Backpack</h1>
           </div>
+
           <div className="navbar">
-            <div className="navbar-item-container">
-              <div className="navbar-item">
-                <LuNotebookText className="icon" />
-                <h1>Diário</h1>
+            <Link to={"/"}>
+              <div className="navbar-item-container">
+                <div className="navbar-item">
+                  <LuNotebookText className="icon" />
+                  <h1>Diário</h1>
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="navbar-item-container">
               <div className="navbar-item">
@@ -76,7 +81,7 @@ function NavigationBar() {
         </main>
         <footer>
           <MdExitToApp className="icon" onClick={handleLogOut} />
-          <ProfileBadge />
+          <ProfileBadge user={user} isAuthUser={true} />
         </footer>
       </div>
     </div>

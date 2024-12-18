@@ -16,7 +16,7 @@
 
 .logo-title .title {
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-left: 1rem;
 }
 
@@ -50,6 +50,11 @@
 .left-side footer .icon {
     font-size: 2.5rem;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.left-side footer .icon:hover {
+    transform: scale(1.1);
 }
 
 .navbar {
@@ -84,8 +89,8 @@
 }
 
 .navbar .navbar-item-container .navbar-item h1 {
-    font-weight: 600;
-    font-size: 1.5rem;
+    font-weight: 500;
+    font-size: 1.6rem;
 }
 
 .button {
