@@ -1,4 +1,4 @@
-const formatTime = (date) => {
+const formatTime = (date, isPost) => {
   date = new Date(date);
   const now = new Date();
   const diffInMs = now - date;
@@ -9,7 +9,7 @@ const formatTime = (date) => {
   const diffInYears = now.getFullYear() - date.getFullYear();
 
   if (diffInHours < 1) {
-    return "";
+    return isPost ? `${diffInMinutes}min` : "";
   } else if (diffInHours < 24) {
     return `${diffInHours}h`;
   } else if (diffInDays < 15) {

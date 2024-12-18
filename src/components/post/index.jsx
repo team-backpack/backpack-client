@@ -3,10 +3,13 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { useRef, useState } from "react";
+import DefaultProfilePicture from "../../assets/default-user.png";
+import { formatTime } from "../../util/time";
 import "./styles.css";
 
 function Post({ post }) {
-  const { profile, mediaURLs, text, postedAt, comments, reposts, likes } = post
+  const { profile, mediaURLs, text, createdAt, comments, reposts, likes } =
+    post;
 
   const sliderRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -14,17 +17,15 @@ function Post({ post }) {
   const [scrollStart, setScrollStart] = useState(0);
 
   const handleMouseDown = (e) => {
-    e.preventDefault();
     setIsDragging(true);
-    setStartX(e.pageX || e.touches[0].pageX); 
+    setStartX(e.pageX || e.touches[0].pageX);
     setScrollStart(sliderRef.current.scrollLeft);
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    e.preventDefault();
     const x = e.pageX || e.touches[0].pageX;
-    const walk = x - startX; 
+    const walk = x - startX;
     sliderRef.current.scrollLeft = scrollStart - walk;
   };
 
@@ -38,18 +39,25 @@ function Post({ post }) {
         <div className="profile">
           <div
             className="picture"
-            style={{ backgroundImage: `url(${profile.pictureURL}})` }}
+            style={
+              profile.pictureURL
+                ? { backgroundImage: `url(${profile.pictureURL})` }
+                : { backgroundImage: `url(${DefaultProfilePicture})` }
+            }
           ></div>
           <div className="names">
             <span className="displayName">{profile.displayName}</span>
-            <span className="username">@{profile.username}</span>
+            <span className="username">@{profile.user.username}</span>
           </div>
         </div>
         <div className="time">
-          <span>{postedAt}</span>
+          <span>{formatTime(createdAt, true)}</span>
         </div>
       </header>
       <main>
+        <div className="text">
+          <pre>{text}</pre>
+        </div>
         <div
           className="images"
           ref={sliderRef}
@@ -64,9 +72,6 @@ function Post({ post }) {
           {mediaURLs.map((media, i) => (
             <img key={i} src={media} alt="imagem" />
           ))}
-        </div>
-        <div className="text">
-          <pre>{text}</pre>
         </div>
       </main>
       <footer>
