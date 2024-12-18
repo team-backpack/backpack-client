@@ -9,34 +9,48 @@ import {
   FaPlus,
 } from "react-icons/fa";
 import { MdExitToApp, MdOutlinePeopleAlt } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Icon from "../../assets/icon.png";
+import { useState } from "react";
+import PostModal from "./post-modal";
 
 function NavigationBar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogOut = async () => {
     await logout();
+    navigate("/");
+  };
 
-    navigate("/")
-  }
+  const { user } = useAuth();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
   return (
     <div className="navigation-bar">
+      <PostModal isOpen={isModalOpen} toggleModal={toggleModal} />
       <div className="left-side">
         <main>
           <div className="logo-title">
-            <img src="icon.png" alt="Logo backpack" className="logo" />
+            <img src={Icon} alt="Logo backpack" className="logo" />
             <h1 className="title">Backpack</h1>
           </div>
+
           <div className="navbar">
-            <div className="navbar-item-container">
-              <div className="navbar-item">
-                <LuNotebookText className="icon" />
-                <h1>Diário</h1>
+            <Link to={"/"}>
+              <div className="navbar-item-container">
+                <div className="navbar-item">
+                  <LuNotebookText className="icon" />
+                  <h1>Diário</h1>
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="navbar-item-container">
               <div className="navbar-item">
@@ -52,12 +66,14 @@ function NavigationBar() {
               </div>
             </div>
 
-            <div className="navbar-item-container">
-              <div className="navbar-item">
-                <FaRegPaperPlane className="icon" />
-                <h1>Mensagens</h1>
+            <Link to={"/messages"}>
+              <div className="navbar-item-container">
+                <div className="navbar-item">
+                  <FaRegPaperPlane className="icon" />
+                  <h1>Mensagens</h1>
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="navbar-item-container">
               <div className="navbar-item">
@@ -66,14 +82,14 @@ function NavigationBar() {
               </div>
             </div>
 
-            <button className="blue button">
+            <button className="blue button" onClick={toggleModal}>
               <FaPlus className="blue" />
             </button>
           </div>
         </main>
         <footer>
           <MdExitToApp className="icon" onClick={handleLogOut} />
-          <ProfileBadge />
+          <ProfileBadge user={user} isAuthUser={true} />
         </footer>
       </div>
     </div>

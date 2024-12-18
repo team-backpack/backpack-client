@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { conversationStore } from "../store/conversationStore";
 import toast from "react-hot-toast";
 
-const useConversation = () => {
+const useUser = () => {
   const [loading, setLoading] = useState(false);
 
-  const { conversations, setConversations } = conversationStore();
+  const getUser = async (userId) => {
+    if (!userId) return;
 
-  const getConversations = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/messages/", {
+      const response = await fetch(`/api/users/${userId}/`, {
         method: "GET",
       });
 
@@ -19,7 +18,7 @@ const useConversation = () => {
         throw new Error(res.error);
       }
 
-      setConversations(res);
+      return res;
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -27,11 +26,7 @@ const useConversation = () => {
     }
   };
 
-  return {
-    loading,
-    conversations,
-    getConversations,
-  };
+  return { loading, getUser };
 };
 
-export { useConversation };
+export { useUser };

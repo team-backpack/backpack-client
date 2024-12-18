@@ -7,7 +7,7 @@ import Feed from "./pages/feed";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/protect";
 import Conversations from "./pages/conversations";
-import Community from "./pages/community";
+import Conversation from "./pages/conversation";
 
 function App() {
   return (
@@ -15,7 +15,10 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Feed />} />
-          <Route path="/conversations" element={<Conversations />} />
+          <Route path="/messages">
+            <Route index element={<Conversations />} />
+            <Route path="/messages/:participantId" element={<Conversation />} />
+          </Route>
         </Route>
         <Route path="/community" element={<Community />} />
         <Route path="/login" element={<Login />} />

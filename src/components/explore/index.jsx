@@ -4,8 +4,11 @@ import CommunityBadge from "../community/badge";
 import ProfileBadge from "../profile/badge";
 import { LuUser } from "react-icons/lu";
 import "./styles.css";
+import { useAuth } from "../../context/AuthContext";
 
 function Explore() {
+  const { user } = useAuth();
+
   return (
     <div className="explore">
       <div className="search">
@@ -38,9 +41,9 @@ function Explore() {
           <h2>Contas que você pode gostar</h2>
         </header>
         <main>
-          <ProfileBadge />
-          <ProfileBadge />
-          <ProfileBadge />
+          <ProfileBadge user={user} isAuthUser={false} />
+          <ProfileBadge user={user} isAuthUser={false} />
+          <ProfileBadge user={user} isAuthUser={false} />
         </main>
       </div>
     </div>
