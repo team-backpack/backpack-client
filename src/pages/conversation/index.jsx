@@ -1,26 +1,23 @@
 import { BeatLoader } from "react-spinners";
-import { useConversation } from "../../hooks/useConversation";
 import "./styles.css";
 import DefaultProfilePicture from "../../assets/default-user.png";
 import { IoArrowBack } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MessageInput from "../../components/conversation/input";
 import Message from "../../components/conversation/message";
+import { useMessage } from "../../hooks/useMessage";
+import { diffInHours } from "../../util/time";
+import { useConversation } from "../../hooks/useConversation";
 
 function Conversation() {
-  const { loading } = useConversation();
+  const params = useParams();
 
-  const participant = {
-    pictureURL: "",
-    displayName: "Nome legal",
-  };
+  const { loading, messages } = useMessage(params.participantId);
 
-  const message = {
-    senderId: "5f7ae737-1d7f-47db-bdaf-00b3cfcb2083",
-    receiverId: "",
-    text: "Olá, como vai?",
-    sendedAt: "14h"
-  }
+  const { selectedConversation } = useConversation();
+  console.log(selectedConversation);
+
+  const participant = selectedConversation.participant;
 
   return (
     <div className="conversation">
@@ -39,7 +36,13 @@ function Conversation() {
             }
             alt="Picture"
           />
-          <h2>{participant.displayName}</h2>
+          <h2>
+            {participant.displayName
+              ? participant.displayName
+              : participant.user
+              ? participant.user.username
+              : participant.username}
+          </h2>
         </div>
       </header>
       {loading ? (
@@ -49,10 +52,31 @@ function Conversation() {
       ) : (
         <main>
           <div className="messages">
-            <Message message={message} isFirst={true} />
-            <Message message={message} />
-            <Message message={message} />
-            <Message message={message} isLast={true} />
+            {messages
+              .slice()
+              .reverse()
+              .map((message, i) => (
+                <Message
+                  key={i}
+                  message={message}
+                  isFirst={
+                    messages[messages.length - i]
+                      ? messages[messages.length - i].senderId !==
+                        message.senderId
+                      : true
+                  }
+                  isLast={
+                    messages[messages.length - i - 2]
+                      ? messages[messages.length - i - 2].senderId !==
+                          message.senderId ||
+                        diffInHours(
+                          message.createdAt,
+                          messages[messages.length - i - 2].createdAt
+                        ) >= 1
+                      : true
+                  }
+                />
+              ))}
           </div>
           <MessageInput />
         </main>

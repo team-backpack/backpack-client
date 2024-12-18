@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { conversationStore } from "../store/conversationStore";
 import toast from "react-hot-toast";
 
-const useConversation = () => {
+const useMessage = (participantId) => {
   const [loading, setLoading] = useState(false);
 
-  const { conversations, setConversations, selectedConversation, setSelectedConversation } = conversationStore();
+  const { messages, setMessages } = conversationStore();
 
   useEffect(() => {
-    const getConversations = async () => {
+    const getMessages = async () => {
       setLoading(true);
       try {
-        const response = await fetch("/api/messages/", {
+        const response = await fetch(`/api/users/${participantId}/messages/`, {
           method: "GET",
         });
 
@@ -20,7 +20,7 @@ const useConversation = () => {
           throw new Error(res.error);
         }
 
-        setConversations(res);
+        setMessages(res);
       } catch (error) {
         toast.error(error.message);
       } finally {
@@ -28,10 +28,10 @@ const useConversation = () => {
       }
     };
 
-    getConversations();
+    getMessages();
   }, []);
 
-  return { loading, conversations, selectedConversation, setSelectedConversation };
+  return { loading, messages };
 };
 
-export { useConversation };
+export { useMessage };

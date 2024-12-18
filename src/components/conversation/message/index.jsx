@@ -1,5 +1,6 @@
 import "./styles.css";
 import { useAuth } from "../../../context/AuthContext";
+import { formatTime } from "../../../util/time";
 
 function Message({ message, isFirst, isLast }) {
   const { user } = useAuth();
@@ -19,7 +20,7 @@ function Message({ message, isFirst, isLast }) {
       </div>
       {isLast && (
         <div className="sendedAt">
-          <span>{message.sendedAt}</span>
+          <span>{formatTime(message.createdAt)}</span>
         </div>
       )}
     </div>

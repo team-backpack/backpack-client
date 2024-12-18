@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 export const conversationStore = create((set) => ({
-    participantId: null,
-    setParticipantId: (participantId) => set({ participantId }),
+    selectedConversation: null,
+    setSelectedConversation: (selectedConversation) => set({ selectedConversation }),
 
     messages: [],
     setMessages: (messages) => set({ messages }),
