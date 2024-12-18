@@ -33,8 +33,9 @@
 
 .profile .info {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
@@ -55,12 +56,6 @@
     color: rgb(30, 30, 30, 70%);
 }
 
-.profile .info .follow {
-    position: absolute;
-    align-self: flex-end;
-    justify-self: flex-end;
-}
-
 .profile .info .follow button {
     color: #09090B;
     background-color: #5DADE2;
@@ -71,4 +66,13 @@
     font-size: 0.9rem;
     cursor: pointer;
     transition: 0.3s;
+}
+
+.profile .info .message {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.profile .info .message .icon {
+    font-size: 1.5rem;
 }

@@ -1,17 +1,19 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Layout from "../layout";
 import { useAuth } from "../../context/AuthContext";
-
 function ProtectedRoute() {
-  const navigate = useNavigate();
   const { user } = useAuth();
 
-  if (!user) navigate("/login");
-
   return (
-    <Layout>
-      <Outlet />
-    </Layout>
+    <div>
+      {user ? (
+        <Layout>
+          <Outlet />
+        </Layout>
+      ) : (
+        <Navigate to="/login" />
+      )}
+    </div>
   );
 }
 

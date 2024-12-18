@@ -7,26 +7,19 @@ import MessageInput from "../../components/conversation/input";
 import Message from "../../components/conversation/message";
 import { useMessage } from "../../hooks/useMessage";
 import { diffInHours } from "../../util/time";
-import { useConversation } from "../../hooks/useConversation";
 import { useUser } from "../../hooks/useUser";
 import { useEffect, useMemo } from "react";
 
 function Conversation() {
   const params = useParams();
   const { loading, messages, getMessages } = useMessage(params.participantId);
+  const { participant, getUser } = useUser();
 
   useEffect(() => {
     getMessages();
+    getUser(params.participantId);
+    console.log(participant);
   }, []);
-
-  const { conversations } = useConversation();
-
-  const { getUser } = useUser();
-  const participant = useMemo(async () => {
-    return await getUser(params.participantId);
-  }, [conversations, params.participantId]);
-
-  console.log(participant);
 
   const sortedMessages = useMemo(() => {
     return messages.slice().reverse();
@@ -60,15 +53,21 @@ function Conversation() {
         <div className="profile">
           <img
             src={
-              participant.profile
-                ? participant.profile.pictureURL
+              participant
+                ? participant.profile
+                  ? participant.profile.pictureURL
+                    ? participant.profile.pictureURL
+                    : DefaultProfilePicture
+                  : DefaultProfilePicture
                 : DefaultProfilePicture
             }
             alt="Picture"
           />
           <h2>
-            {participant.profile
-              ? participant.profile.displayName
+            {participant
+              ? participant.profile
+                ? participant.profile.displayName
+                : participant.username
               : participant.username}
           </h2>
         </div>

@@ -29,8 +29,8 @@ const AuthProvider = ({ children }) => {
       return;
     } finally {
       setLoading(false);
-      toast.success("Usuário deslogado com sucesso");
     }
+    toast.success("Usuário deslogado com sucesso");
   };
 
   const login = async (data) => {
@@ -67,8 +67,8 @@ const AuthProvider = ({ children }) => {
       return;
     } finally {
       setLoading(false);
-      toast.success("Usuário logado com sucesso");
     }
+    toast.success("Usuário logado com sucesso");
   };
 
   const register = async (data) => {
@@ -97,8 +97,8 @@ const AuthProvider = ({ children }) => {
       return false;
     } finally {
       setLoading(false);
-      toast.success("Cadastrado com sucesso");
     }
+    toast.success("Cadastrado com sucesso");
 
     return true;
   };
@@ -125,8 +125,8 @@ const AuthProvider = ({ children }) => {
       return;
     } finally {
       setLoading(false);
-      toast.success("Usuário verificado com sucesso");
     }
+    toast.success("Usuário verificado com sucesso");
   };
 
   return (

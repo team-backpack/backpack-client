@@ -1,13 +1,17 @@
 import { FiSearch } from "react-icons/fi";
-import { MdOutlinePeopleAlt } from "react-icons/md";
-import CommunityBadge from "../community/badge";
 import ProfileBadge from "../profile/badge";
 import { LuUser } from "react-icons/lu";
 import "./styles.css";
-import { useAuth } from "../../context/AuthContext";
+import { useUser } from "../../hooks/useUser";
+import { useEffect } from "react";
+import { BeatLoader } from "react-spinners";
 
 function Explore() {
-  const { user } = useAuth();
+  const { loading, users, getUsers } = useUser();
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <div className="explore">
@@ -25,25 +29,23 @@ function Explore() {
           </div>
         </form>
       </div>
-      <div className="communities">
-        <header className="title">
-          <MdOutlinePeopleAlt className="icon" />
-          <h2>Comunidades</h2>
-        </header>
-        <main>
-          <CommunityBadge />
-          <CommunityBadge />
-        </main>
-      </div>
       <div className="profiles">
         <header className="title">
           <LuUser className="icon" />
           <h2>Contas que você pode gostar</h2>
         </header>
         <main>
-          <ProfileBadge user={user} isAuthUser={false} />
-          <ProfileBadge user={user} isAuthUser={false} />
-          <ProfileBadge user={user} isAuthUser={false} />
+          {loading ? (
+            <div className="spinner">
+              <BeatLoader loading={loading} />
+            </div>
+          ) : (
+            <>
+              {users.map((user, i) => (
+                <ProfileBadge key={i} user={user} isAuthUser={false} />
+              ))}
+            </>
+          )}
         </main>
       </div>
     </div>

@@ -11,12 +11,10 @@ function Conversations() {
     getConversations();
   }, []);
 
-  console.log(conversations);
-
   return (
     <div className="conversations">
       <header>
-        <h2>Conversas</h2>
+        <h2>Mensagens</h2>
       </header>
       {loading ? (
         <div className="spinner">

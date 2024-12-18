@@ -4,6 +4,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useAuth } from "../../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { BeatLoader } from "react-spinners";
 
 function TokenConfirmation({ setCurrentStep }) {
   const [inputs, setInputs] = useState({
@@ -19,7 +20,7 @@ function TokenConfirmation({ setCurrentStep }) {
   };
 
   const navigate = useNavigate();
-  const { verify } = useAuth();
+  const { loading, verify } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,28 +40,34 @@ function TokenConfirmation({ setCurrentStep }) {
       <div className="text">
         <p>Um código foi enviado para example@wow.com. Confirme-o abaixo.</p>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-control">
-          <label>Código de verificação</label>
-          <div className="input-icons">
-            <FaAsterisk className="icon left" />
-            <input
-              type="text"
-              placeholder="Código"
-              name="verificationToken"
-              className="icon-left"
-              value={inputs.verificationToken}
-              onChange={handleInputChange}
-            />
+      {loading ? (
+        <div className="spinner">
+          <BeatLoader loading={loading} />
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className="form-control">
+            <label>Código de verificação</label>
+            <div className="input-icons">
+              <FaAsterisk className="icon left" />
+              <input
+                type="text"
+                placeholder="Código"
+                name="verificationToken"
+                className="icon-left"
+                value={inputs.verificationToken}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="form-control">
-          <button type="submit" className="blue">
-            Confirmar
-          </button>
-        </div>
-      </form>
+          <div className="form-control">
+            <button type="submit" className="blue">
+              Confirmar
+            </button>
+          </div>
+        </form>
+      )}
     </>
   );
 }

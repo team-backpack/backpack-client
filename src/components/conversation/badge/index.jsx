@@ -13,18 +13,16 @@ function ConversationBadge({ conversation }) {
   const { setSelectedConversation } = useConversation();
 
   return (
-    <Link
-      to={`/messages/${
-        participant.user ? participant.user.userId : participant.userId
+    <div
+      className={`conversation-badge ${
+        lastMessage.receiverId === user.userId && !lastMessage.seen ? "new" : ""
       }`}
-      onClick={() => setSelectedConversation(conversation)}
     >
-      <div
-        className={`conversation-badge ${
-          lastMessage.receiverId === user.userId && !lastMessage.seen
-            ? "new"
-            : ""
+      <Link
+        to={`/messages/${
+          participant.user ? participant.user.userId : participant.userId
         }`}
+        onClick={() => setSelectedConversation(conversation)}
       >
         <div className="user">
           <img
@@ -50,8 +48,8 @@ function ConversationBadge({ conversation }) {
           </div>
         </div>
         <span className="time">{formatTime(lastMessage.createdAt)}</span>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 
