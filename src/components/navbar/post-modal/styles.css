@@ -26,6 +26,11 @@
     padding: 1.4rem 1.4rem 0 1.4rem;
 }
 
+.modal form {
+    width: 100%;
+    height: 100%;
+}
+
 .modal .close {
     justify-self: flex-end;
     top: 1rem;
@@ -76,7 +81,7 @@
     width: 100%;
 }
 
-.modal main .info form textarea {
+.modal main .info textarea {
     border: none;
     outline: none;
     resize: none;
@@ -87,7 +92,7 @@
     padding: 0.5rem;
 }
 
-.modal main .info form textarea:focus {
+.modal main .info textarea:focus {
     outline: none;
 }
 
@@ -162,4 +167,32 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.preview-images {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.preview-image {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.preview-image .icon {
+    font-size: 1.5rem;
+    color: #9e9ea0;
+    position: absolute;
+    cursor: pointer;
+}
+
+.preview-image img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+    object-fit: cover;
 }
